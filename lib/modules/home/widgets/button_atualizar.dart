@@ -20,7 +20,8 @@ class _ButtonAtualizarState extends State<ButtonAtualizar>
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 5), () => _timerController.start());
+    // TODO: REATIVAR INICIALIZAÇÃO DO TIMER DE STATUS DE MESAS
+    // Future.delayed(Duration(seconds: 5), () => _timerController.start());
   }
 
   @override
@@ -30,18 +31,20 @@ class _ButtonAtualizarState extends State<ButtonAtualizar>
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextButton.icon(
-            onPressed: () async {
-              _timerController.pause();
-              //TODO: substituir por execução da busca do status das mesas
-              await Future.delayed(Duration(seconds: 3));
-              _timerController.restart();
-            },
-            icon: Icon(Icons.replay_circle_filled_rounded),
-            label: Text("Atualizar"),
+          Container(
+            height: 40,
+            child: TextButton.icon(
+              label: Text("Atualizar"),
+              icon: Icon(Icons.replay_circle_filled_rounded),
+              onPressed: () async {
+                _timerController.pause();
+                //TODO: substituir por execução da busca do status das mesas
+                await Future.delayed(Duration(seconds: 3));
+                _timerController.restart();
+              },
+            ),
           ),
-          // Container(
-          //     width: 80, child: LinearProgressIndicator(value: progresso)),
+
           Countdown(
             controller: _timerController,
             seconds: _durPadrao,
@@ -57,11 +60,11 @@ class _ButtonAtualizarState extends State<ButtonAtualizar>
             },
             interval: Duration(milliseconds: 100),
             onFinished: () async {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Timer is done!'),
-                ),
-              );
+              // ScaffoldMessenger.of(context).showSnackBar(
+              //   SnackBar(
+              //     content: Text('Timer is done!'),
+              //   ),
+              // );
               await Future.delayed(Duration(seconds: 2));
               _timerController.restart();
             },

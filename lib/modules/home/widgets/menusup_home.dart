@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:wklcomanda/modules/home/widgets/button_atualizar.dart';
+import 'package:wklcomanda/modules/home/widgets/custom_ppmenuitem.dart';
 
 class MenuSuperiorHome extends StatelessWidget {
   const MenuSuperiorHome({Key? key}) : super(key: key);
@@ -10,7 +11,7 @@ class MenuSuperiorHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.maxFinite,
-      height: 40,
+      height: 55,
       padding: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         // color: Colors.black,
@@ -28,16 +29,43 @@ class MenuSuperiorHome extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              _circleQtdStatus(Colors.black, 26),
-              _circleQtdStatus(Colors.green, 12),
-              _circleQtdStatus(Colors.orange, 2),
-            ],
-          ),
+          _menuPopup(),
+          // _menuDropDown(),
           ButtonAtualizar(),
         ],
       ),
+    );
+  }
+
+  PopupMenuButton<String> _menuPopup() {
+    return PopupMenuButton<String>(
+      color: Colors.black,
+      offset: Offset.fromDirection(90, 25),
+      padding: const EdgeInsets.only(top: 35),
+      onSelected: (val) {},
+      // icon: Icon(Icons.menu),
+      child: _rowStatusMesas(),
+
+      itemBuilder: (_) => [
+        // TODO: SET FILTROATUAL POR VARIABLE EM HOME CONTROLLER
+        CustomPpMenuItem.all(filtroAtual: "FREE"),
+
+        CustomPpMenuItem.ocupadas(filtroAtual: "OCUP"),
+        CustomPpMenuItem.livres(filtroAtual: "FREE"),
+        CustomPpMenuItem.dormindo(filtroAtual: "FREE"),
+      ],
+      tooltip: "Clique para filtrar",
+    );
+  }
+
+  Row _rowStatusMesas() {
+    // TODO: GET QTD DE MESAS EM CADA STATUS
+    return Row(
+      children: [
+        _circleQtdStatus(Colors.black, 25),
+        _circleQtdStatus(Colors.green, 12),
+        _circleQtdStatus(Colors.orange, 2),
+      ],
     );
   }
 
@@ -47,9 +75,9 @@ class MenuSuperiorHome extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CircleAvatar(radius: 6, backgroundColor: cor),
+          CircleAvatar(radius: 8, backgroundColor: cor),
           SizedBox(width: 2),
-          Text("$quantidade", style: TextStyle(fontSize: 13)),
+          Text("$quantidade", style: TextStyle(fontSize: 14)),
         ],
       ),
     );
