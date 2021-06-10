@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'home_controller.dart';
 import 'widgets/menusup_home.dart';
 import 'widgets/mesas_gridview.dart';
+import 'widgets/triangrect.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,7 +13,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(),
-      body: Column(
+      body: //TriangRect(),
+
+          Column(
         mainAxisSize: MainAxisSize.max,
         children: [
           MenuSuperiorHome(),

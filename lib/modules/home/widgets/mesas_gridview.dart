@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wklcomanda/modules/home/home_controller.dart';
 
+import 'triangrect.dart';
+
 class MesasGridView extends StatelessWidget {
   MesasGridView({Key? key}) : super(key: key);
 
@@ -20,12 +22,34 @@ class MesasGridView extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             return LayoutBuilder(builder: (context, constraint) {
-              return Container(
-                // margin: EdgeInsets.all(5),
-                alignment: Alignment.center,
-                color: Colors.blueGrey[200],
-                child: Text(
-                  "Mesa $index" + '\n' + constraint.maxWidth.toStringAsFixed(2),
+              return Card(
+                shadowColor: Colors.green,
+                elevation: 3,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Stack(
+                    children: [
+                      TriangRect(color: Colors.green),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Text(
+                          constraint.maxWidth.toStringAsFixed(2),
+                        ),
+                      ),
+                      Positioned(
+                        //alignment: Alignment.center,
+                        bottom: (constraint.maxHeight / 2) - 16,
+                        right: (constraint.maxWidth / 2) - 16,
+                        child: Text(
+                          "$index",
+                          style: TextStyle(
+                              fontSize: 35,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             });
