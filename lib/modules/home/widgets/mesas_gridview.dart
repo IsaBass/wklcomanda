@@ -22,33 +22,41 @@ class MesasGridView extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             return LayoutBuilder(builder: (context, constraint) {
-              return Card(
-                shadowColor: Colors.green,
-                elevation: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Stack(
-                    children: [
-                      TriangRect(color: Colors.green),
-                      Align(
-                        alignment: Alignment.bottomRight,
-                        child: Text(
-                          constraint.maxWidth.toStringAsFixed(2),
+              return InkWell(
+                onTap: () {
+                  Get.toNamed(
+                    '/mesa',
+                    arguments: {'mesa': index.toString()},
+                  );
+                },
+                child: Card(
+                  shadowColor: Colors.green,
+                  elevation: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Stack(
+                      children: [
+                        TriangRect(color: Colors.green),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: Text(
+                            constraint.maxWidth.toStringAsFixed(2),
+                          ),
                         ),
-                      ),
-                      Positioned(
-                        //alignment: Alignment.center,
-                        bottom: (constraint.maxHeight / 2) - 16,
-                        right: (constraint.maxWidth / 2) - 16,
-                        child: Text(
-                          "$index",
-                          style: TextStyle(
-                              fontSize: 35,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600),
+                        Positioned(
+                          //alignment: Alignment.center,
+                          bottom: (constraint.maxHeight / 2) - 16,
+                          right: (constraint.maxWidth / 2) - 16,
+                          child: Text(
+                            "$index",
+                            style: TextStyle(
+                                fontSize: 35,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               );

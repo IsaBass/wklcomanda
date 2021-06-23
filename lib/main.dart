@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wklcomanda/modules/mesamodule/mesa_page.dart';
 
 import 'modules/home/home_controller.dart';
 import 'modules/home/homepage.dart';
@@ -21,10 +22,12 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/', page: () => HomePage()),
         //   GetPage(name: '/login', page: () => Login()),
-        //   GetPage(
-        //       name: '/cadastro',
-        //       page: () => Cadastro(),
-        //       transition: Transition.cupertino),
+        GetPage(
+          name: '/mesa',
+          page: () => MesaPage(),
+          binding: MesaBinding(),
+          transition: Transition.cupertino,
+        ),
       ],
       initialBinding: InitialBinding(),
     );
