@@ -55,7 +55,7 @@ class _MesaPageState extends State<MesaPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Obx(() => Text(_controller.mesa)),
+        title: Obx(() => Text("Mesa ${_controller.mesa}")),
         bottom: TabBar(
           controller: _tabController,
           tabs: myTabs,
