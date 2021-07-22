@@ -1,4 +1,14 @@
+import 'package:wklcomanda/shared/services/i_http_service.dart';
+
 class MesaRepository {
+  final IHttpService _http;
+
+  MesaRepository(this._http);
+
+  all() async {
+    var resp = await _http.deletee('urlaqui');
+  }
+
 // final MyApi api;
 
 // MesaRepository(this.api);

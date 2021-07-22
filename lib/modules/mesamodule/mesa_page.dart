@@ -2,19 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'mesa_controller.dart';
-import 'mesa_repository.dart';
+
 import 'widgets/tab_naoregistrados.dart';
 import 'widgets/tab_registrados.dart';
-
-class MesaBinding implements Bindings {
-  @override
-  void dependencies() {
-    Get.lazyPut<MesaController>(() => MesaController(
-          MesaRepository(),
-          mesa: Get.arguments['mesa']!,
-        ));
-  }
-}
 
 class MesaPage extends StatefulWidget {
   @override

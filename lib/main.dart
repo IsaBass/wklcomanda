@@ -4,6 +4,7 @@ import 'package:wklcomanda/modules/mesamodule/mesa_page.dart';
 
 import 'modules/home/home_controller.dart';
 import 'modules/home/homepage.dart';
+import 'modules/mesamodule/mesa_binding.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,16 +19,21 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
       //home: MyHomePage(title: 'Flutter Demo Home Page'),
-      initialRoute: '/',
+      initialRoute: '/home',
       getPages: [
-        GetPage(name: '/', page: () => HomePage()),
-        //   GetPage(name: '/login', page: () => Login()),
         GetPage(
-          name: '/mesa',
-          page: () => MesaPage(),
-          binding: MesaBinding(),
-          transition: Transition.cupertino,
+          name: '/home',
+          page: () => HomePage(),
+          children: [
+            GetPage(
+              name: '/mesa',
+              page: () => MesaPage(),
+              binding: MesaBinding(),
+              transition: Transition.cupertino,
+            ),
+          ],
         ),
+        //   GetPage(name: '/login', page: () => Login()),
       ],
       initialBinding: InitialBinding(),
     );

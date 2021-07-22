@@ -25,7 +25,7 @@ class MesasGridView extends StatelessWidget {
               return InkWell(
                 onTap: () {
                   Get.toNamed(
-                    '/mesa',
+                    '/home/mesa',
                     arguments: {'mesa': index.toString()},
                   );
                 },
