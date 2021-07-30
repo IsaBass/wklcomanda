@@ -1,12 +1,12 @@
-import 'package:wklcomanda/shared/services/i_http_service.dart';
+import 'package:wklcomanda/services/i_rest_service.dart';
 
 class MesaRepository {
-  final IHttpService _http;
+  final IRestService _http;
 
   MesaRepository(this._http);
 
   all() async {
-    var resp = await _http.deletee('urlaqui');
+    var resp = await _http.restGet('urlaqui');
   }
 
 // final MyApi api;

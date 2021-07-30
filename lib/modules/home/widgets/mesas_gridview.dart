@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:wklcomanda/modules/home/home_controller.dart';
+import 'package:wklcomanda/shared/app_routes.dart';
 
 import 'triangrect.dart';
 
@@ -25,7 +26,7 @@ class MesasGridView extends StatelessWidget {
               return InkWell(
                 onTap: () {
                   Get.toNamed(
-                    '/home/mesa',
+                    AppRoutes.home_mesa,
                     arguments: {'mesa': index.toString()},
                   );
                 },

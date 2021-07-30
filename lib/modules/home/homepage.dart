@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:wklcomanda/shared/app_routes.dart';
 
 import 'home_controller.dart';
 import 'widgets/menusup_home.dart';
 import 'widgets/mesas_gridview.dart';
-import 'widgets/triangrect.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,6 +18,13 @@ class HomePage extends StatelessWidget {
           Column(
         mainAxisSize: MainAxisSize.max,
         children: [
+          Container(
+            height: 35,
+            child: TextButton(
+              child: Text('Universities'),
+              onPressed: () => Get.toNamed(AppRoutes.universities),
+            ),
+          ),
           MenuSuperiorHome(),
           Expanded(
             child: Container(
