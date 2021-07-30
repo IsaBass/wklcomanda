@@ -7,6 +7,7 @@ import 'package:wklcomanda/shared/app_routes.dart';
 import 'modules/home/home_controller.dart';
 import 'modules/home/homepage.dart';
 import 'modules/mesamodule/mesa_binding.dart';
+import 'services/dio_service.dart';
 import 'services/getconnect_service.dart';
 import 'services/i_rest_service.dart';
 

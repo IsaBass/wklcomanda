@@ -47,35 +47,6 @@ class RestDio implements IRestService {
   // }
 
   @override
-  Future<Resp<T>> restDelete<T>(
-    String url, {
-    Map<String, String>? headers,
-    String? contentType,
-    Map<String, dynamic>? query,
-  }) async {
-    try {
-      var response = await dio.delete(
-        url,
-        queryParameters: query,
-        options: Options(
-          headers: headers,
-          contentType: contentType,
-        ),
-      );
-
-      if (response.statusCode! > 300) {
-        return Resp.error(
-            'Falha: ${response.statusCode} ${response.statusMessage}');
-      }
-
-      return Resp.ok(jsonDecode(response.data));
-      //
-    } catch (e) {
-      return Resp.error(e.toString());
-    }
-  }
-
-  @override
   Future<Resp<T>> restGet<T>(
     String url, {
     Map<String, String>? headers,
@@ -97,7 +68,7 @@ class RestDio implements IRestService {
             'Falha: ${response.statusCode} ${response.statusMessage}');
       }
 
-      return Resp.ok(jsonDecode(response.data));
+      return Resp.ok(response.data);
       //
     } catch (e) {
       return Resp.error(e.toString());
@@ -142,6 +113,35 @@ class RestDio implements IRestService {
   }) async {
     try {
       var response = await dio.put(
+        url,
+        queryParameters: query,
+        options: Options(
+          headers: headers,
+          contentType: contentType,
+        ),
+      );
+
+      if (response.statusCode! > 300) {
+        return Resp.error(
+            'Falha: ${response.statusCode} ${response.statusMessage}');
+      }
+
+      return Resp.ok(jsonDecode(response.data));
+      //
+    } catch (e) {
+      return Resp.error(e.toString());
+    }
+  }
+
+  @override
+  Future<Resp<T>> restDelete<T>(
+    String url, {
+    Map<String, String>? headers,
+    String? contentType,
+    Map<String, dynamic>? query,
+  }) async {
+    try {
+      var response = await dio.delete(
         url,
         queryParameters: query,
         options: Options(

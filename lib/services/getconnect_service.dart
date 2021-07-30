@@ -25,11 +25,13 @@ class RestGetConnect extends GetConnect implements IRestService {
     httpClient.defaultContentType = "application/json";
     httpClient.timeout = Duration(seconds: 8);
     httpClient.addResponseModifier((request, response) async {
-      print(response.body);
+      //print(response.body);
     });
     httpClient.addRequestModifier((Request request) async {
       // add request here
-      request.headers['teste'] = 'headerteste';
+      //request.headers['teste'] = 'headerteste';
+      //request.headers['Access-Control-Allow-Origin'] = "*";
+
       return request;
     });
     var headers = {'Authorization': "Bearer $token"};
@@ -39,27 +41,6 @@ class RestGetConnect extends GetConnect implements IRestService {
     });
 
     super.onInit();
-  }
-
-  @override
-  Future<Resp<T>> restDelete<T>(String url,
-      {Map<String, String>? headers,
-      String? contentType,
-      Map<String, dynamic>? query}) async {
-    try {
-      var response = await httpClient.delete(
-        url,
-        headers: headers,
-        contentType: contentType,
-        query: query,
-      );
-      if (response.isOk) {
-        return Resp.ok(response.body);
-      }
-      return Resp.error('Falha: ${response.statusCode} ${response.statusText}');
-    } catch (e) {
-      return Resp.error(e.toString());
-    }
   }
 
   @override
@@ -77,8 +58,9 @@ class RestGetConnect extends GetConnect implements IRestService {
         query: query,
       );
       if (response.isOk) {
-        return Resp.ok(response.body as T);
+        return Resp.ok(response.body);
       }
+      print(response.statusText);
       return Resp.error('Falha: ${response.statusCode} ${response.statusText}');
     } catch (e) {
       print('erro get: ' + e.toString());
@@ -118,6 +100,27 @@ class RestGetConnect extends GetConnect implements IRestService {
   }) async {
     try {
       var response = await httpClient.put(
+        url,
+        headers: headers,
+        contentType: contentType,
+        query: query,
+      );
+      if (response.isOk) {
+        return Resp.ok(response.body);
+      }
+      return Resp.error('Falha: ${response.statusCode} ${response.statusText}');
+    } catch (e) {
+      return Resp.error(e.toString());
+    }
+  }
+
+  @override
+  Future<Resp<T>> restDelete<T>(String url,
+      {Map<String, String>? headers,
+      String? contentType,
+      Map<String, dynamic>? query}) async {
+    try {
+      var response = await httpClient.delete(
         url,
         headers: headers,
         contentType: contentType,

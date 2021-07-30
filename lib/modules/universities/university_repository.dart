@@ -9,13 +9,27 @@ class UniversityRepository implements IUniversityRepository {
 
   @override
   Future<Resp<List<Map<String, dynamic>>>> getAll() async {
-    var resp = await _http.restGet<List<dynamic>>(
+    var resp = await _http.restGet<dynamic>(
       'search',
-      query: {'country': 'Brazil'},
+      query: {'country': 'Brazil', 'name': 'Universidade'},
+      headers: {
+        "Accept": "application/json",
+        "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+        "Access-Control-Allow-Credentials":
+            'true', // Required for cookies, authorization headers with HTTPS
+        // "Access-Control-Allow-Headers":
+        //     "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+        "Access-Control-Allow-Methods": "GET, HEAD, POST, OPTIONS",
+      },
     );
 
-    if (resp.isError && resp.data != null) {
-      return Resp.ok(resp.data!.map((e) => e as Map<String, dynamic>).toList());
+    if (resp.isError) return Resp.error(resp.error);
+
+    if (resp.isEmpty || (resp.data == null) || (resp.data as List).length == 0)
+      return Resp.empty();
+    if (resp.isOK) {
+      return Resp.ok(
+          (resp.data as List).map((e) => e as Map<String, dynamic>).toList());
     }
 
     return Resp.error(resp.error);
