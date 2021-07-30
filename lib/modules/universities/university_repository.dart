@@ -18,6 +18,6 @@ class UniversityRepository implements IUniversityRepository {
       return Resp.ok(resp.data!.map((e) => e as Map<String, dynamic>).toList());
     }
 
-    return resp;
+    return Resp.error(resp.error);
   }
 }
